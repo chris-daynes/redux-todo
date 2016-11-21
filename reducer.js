@@ -17,7 +17,9 @@ function reducer(state, action) {
       })
       return newState
     case 'TOGGLE_TODO':
+    console.log('This is in the todo toggle');
       newState.todos[action.payload].completed = !newState.todos[action.payload].completed
+      console.log(newState);
       return newState
     default:
       return newState

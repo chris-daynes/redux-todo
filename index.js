@@ -16,7 +16,7 @@ const state = {
     {
       id: 1,
       text: 'Get Bread',
-      completed: false
+      completed: true
     }
 
   ]
@@ -32,11 +32,10 @@ main.appendChild(initView)
 
 subscribe(upDateView)
 
-
-const upDateView = () => {
+function upDateView () {
   let state = getState()
   let newView = mainTemplate(state, dispatch)
   morph(initView, newView)
 }
 
-dispatch(state, {type: 'INIT'})
+dispatch({type: 'INIT'})
