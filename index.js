@@ -5,37 +5,29 @@ const request = require('superagent');
 
 const mainTemplate = require('./views/mainTemplate')
 const reducer = require('./reducer')
+const state = require('./state')
 
-const state = {
-  todos: [
-    {
-      id: 0,
-      text: 'Learn web dev',
-      completed: false
-    },
-    {
-      id: 1,
-      text: 'Get Bread',
-      completed: true
-    }
-
-  ]
-}
 
 const main = document.querySelector('main')
+const app = document.createElement('div')
+main.appendChild(app)
+
+
+function appTemplate(state, dispatch) {
+  return html`
+    <div id='app'>
+      ${mainTemplate(state, dispatch)}
+    </div>
+  `
+}
 
 const store = redux.createStore(reducer, state)
 const { dispatch, getState, subscribe } = store
 
-var initView = mainTemplate(state, dispatch)
-main.appendChild(initView)
 
-subscribe(upDateView)
-
-function upDateView () {
-  let state = getState()
-  let newView = mainTemplate(state, dispatch)
-  morph(initView, newView)
-}
+subscribe(() => {
+  const state = getState()
+  html.update(app, appTemplate(state, dispatch))
+})
 
 dispatch({type: 'INIT'})
