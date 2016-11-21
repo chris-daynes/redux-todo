@@ -9,14 +9,16 @@ function reducer(state, action) {
 
   switch(action.type) {
     case 'ADD_TODO':
-    const { id, text, completed } = action.payload
+      const { id, text, completed } = action.payload
       newState.todos.push({
         id: id,
         text: text,
         completed: completed
       })
       return newState
-
+    case 'TOGGLE_TODO':
+      newState.todos[action.payload].completed = !newState.todos[action.payload].completed
+      return newState
     default:
       return newState
   }

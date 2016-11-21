@@ -12,7 +12,13 @@ const state = {
       id: 0,
       text: 'Learn web dev',
       completed: false
+    },
+    {
+      id: 1,
+      text: 'Get Bread',
+      completed: false
     }
+
   ]
 }
 
@@ -21,7 +27,8 @@ const main = document.querySelector('main')
 const store = redux.createStore(reducer, state)
 const { dispatch, getState, subscribe } = store
 
-var initView = main.appendChild(mainTemplate(state, dispatch))
+var initView = mainTemplate(state, dispatch)
+main.appendChild(initView)
 
 subscribe(upDateView)
 
